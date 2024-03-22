@@ -18,4 +18,7 @@ let http_request: Vec<_> = buf_reader
 
 Karena terdapat deklarasi Vec<_> maka kita akan menyimpan request yang dikirim ke Vector tersebut. Fungsi .lines() berguna untuk memisahkan String data dari stream ketika bertemu dengan \n. Kemudian, untuk mendapatkan setiap String yang ada, kita melakukan map dan unwrap setiap dari String tersebut yang di mana kita memanfaatkan result untuk unwrap tersebut. Setelah itu, .take_while(|line| !line.is_empty()) akan berhenti ketika dia menemukan line yang kosong dan setelah berhenti maka kita akan menggabungkan semua hasil ke Vector tersebut.
 
-Dan terakhir, kita akan print output hari http_request tersebut.
+Dan terakhir, kita akan print output dari http_request tersebut.
+```
+println!("Request: {:#?}", http_request);
+```
