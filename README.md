@@ -49,8 +49,8 @@ Dalam validasi yang dilakukan, kita mengecek apakah method request yang digunaka
 
 Jika kita lihat kode validasi berdasarkan buku (Not Refactored), terdapat redundansi potongan kode yaitu untuk let length, let response, dan stream.write_all. Maka dari itu, kita harus melakukan refactoring agar kode yang kita tulis tidak redundan dan dapat menjadi lebih clean. Oleh karena itu, saya menghapus conditional if-else nya dan membuat dua variabel yaitu let (status_line, contents) yang ditambahkan dengan conditional agar dapat bernilai sesuai dengan request header yang diberikan
 
-```
-Solusi untuk refactoring ini terinspirasi oleh dokumentasi Rust dengan link sebagai berikut:
+
+[Solusi untuk refactoring ini terinspirasi oleh dokumentasi Rust dengan link sebagai berikut]
 https://doc.rust-lang.org/reference/expressions/if-expr.html
-```
+
 ![Refactor Inspiration](assets/images/refactor_inspiration.jpg)
