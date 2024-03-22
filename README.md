@@ -37,3 +37,20 @@ Terdapat beberapa kode yang ditambahkan kepada method handle_connection:
     - Kode ini berfungsi untuk membuat String response yang di mana dibuat dengan menggunakan String formatting yang akan ditambahkan ke success response
 1. stream.write_all(response.as_bytes()).unwrap();
     - Kode ini berfungsi untuk menuliskan variabel response ke dalam bentuk bytes ke dalam stream.
+
+## Commit 3
+![Commit 3 Screen Capture](assets/images/commit3.jpg)
+
+Sebelum kita membahas mengenai pembagian mengenai response yang berhasil dan tidak dan alasan mengapa dibutuhkan refactor, kita bahas sedikit terlebih dahulu terkait bagaimana program melakukan validasi. 
+
+Jika kita lihat potongan kode di bawah ini pada method handle_connection, variable request_line akan berisikan buf_reader.lines().next().unwrap().unwrap(), yang di mana menyebabkan variabel request_line berisikan request header dari request yang diberikan. Dari request header ini kita dapat melihat method dari request yang diberikan (either GET atau POST atau dll) beserta path dari request tersebut. Dalam validasi ini, kita mengecek apakah path yang diberikan pada request merupakan path kosong saja atau tidak dan jika ternyata merupakan path kosong, maka nanti kita baru menghandle kasus 404.
+
+Dalam validasi yang dilakukan, kita mengecek apakah method request yang digunakan adalah GET dan path dari request adalah path kosong saja. Maka dari itu, kita tambahkan if-else untuk menghandle validasi ini. Jika ternyata request yang diberikan tidak sesuai ketentuan tersebut, maka program akan masuk ke blok else untuk memberikan response 404 dan menampilkan 404.html yang menunjukkan bahwa terjadi kesalahan dalam Path. 
+
+Jika kita lihat kode validasi berdasarkan buku (Not Refactored), terdapat redundansi potongan kode yaitu untuk let length, let response, dan stream.write_all. Maka dari itu, kita harus melakukan refactoring agar kode yang kita tulis tidak redundan dan dapat menjadi lebih clean. Oleh karena itu, saya menghapus conditional if-else nya dan membuat dua variabel yaitu let (status_line, contents) yang ditambahkan dengan conditional agar dapat bernilai sesuai dengan request header yang diberikan
+
+```
+Solusi untuk refactoring ini terinspirasi oleh dokumentasi Rust dengan link sebagai berikut:
+https://doc.rust-lang.org/reference/expressions/if-expr.html
+```
+![Refactor Inspiration](assets/images/refactor_inspiration.jpg)
