@@ -22,3 +22,18 @@ Dan terakhir, kita akan print output dari http_request tersebut.
 ```
 println!("Request: {:#?}", http_request);
 ```
+
+## Commit 2
+![Commit 2 screen capture](assets/images/commit2.jpg)
+
+Terdapat beberapa kode yang ditambahkan kepada method handle_connection:
+1. let status_line = "HTTP/1.1 200 OK"; 
+    - Penambahan variabel status_line ini bertujuan untuk memberikan status code sebagai response dari request yang diberikan, yang di mana status code yang bernilai 200 menandakan bahwa request yang diberikan oleh pengguna berhasil diterima oleh server dan dikembalikan kepada pengguna.
+1. let contents = fs::read_to_string("hello.html").unwrap(); 
+    - Kode ini berfungsi untuk membaca file hello.html dan mengubahnya menjadi dalam bentuk string
+1. let length = contents.len();
+    - Kode ini berfungsi untuk menghitung panjang string dari contents. Karena contents merupakan variabel untuk menyimpan String hasil pembacaan hello.html, maka pada variabel length akan berisikan panjang dari isi html code untuk  hello.html
+1. let response = format!("{status_line}\r\nContent-Length: {length}\r\n\r\n{contents}");
+    - Kode ini berfungsi untuk membuat String response yang di mana dibuat dengan menggunakan String formatting yang akan ditambahkan ke success response
+1. stream.write_all(response.as_bytes()).unwrap();
+    - Kode ini berfungsi untuk menuliskan variabel response ke dalam bentuk bytes ke dalam stream.
