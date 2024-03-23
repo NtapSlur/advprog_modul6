@@ -54,3 +54,9 @@ Jika kita lihat kode validasi berdasarkan buku (Not Refactored), terdapat redund
 https://doc.rust-lang.org/reference/expressions/if-expr.html
 
 ![Refactor Inspiration](assets/images/refactor_inspiration.jpg)
+
+## Commit 4
+Pada method handle_connection, kita melakukan perubahan dengan menambahkan kasus validasi untuk path /sleep dengan method request GET. Ketika kita sebagai pengguna memanggil request untuk path /sleep dengan URL sebagai berikut: "http:127.0.0.1:7878/sleep", maka website akan loading terlebih dahulu selama 10 detik lalu baru akan menampilkan hello.html. Hal ini diakibatkan karena ketika kasus validasi path /sleep bernilai True, maka thread program akan di-sleep selama 10 detik, yang di mana kode yang bertanggung jawab atas hal ini dituliskan dibawah ini.
+```
+thread::sleep(Duration::from_secs(10));
+```
