@@ -60,3 +60,6 @@ Pada method handle_connection, kita melakukan perubahan dengan menambahkan kasus
 ```
 thread::sleep(Duration::from_secs(10));
 ```
+
+## Commit 5
+Threadpool digunakan untuk mengimplementasikan multithreaded server yang nantinya dapat menghandle banyak request secara sekaligus. Dalam implementasinya, kita perlu untuk mendefinisikan Worker yang menyimpan id dan JoinHandle<()> yang di mana JoinHandle ini digunakan untuk mengatur threading dari program. Karena Worker digunakan untuk memproses request secara multithreaded, maka kita perlu untuk membuat sender dan receiver untuk setiap Worker yang ada sehingga ketika Worker selesai melakukan tugasnya, mereka dapat memberikan sinyal bahwa Worker sudah selesai dan nanti mutexnya dapat berhenti.
